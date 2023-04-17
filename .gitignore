@@ -1,0 +1,4 @@
+# Project exclude paths
+/out/
+src/resources/HangmanMusic.wav
+src/resources/pooh-shiesty.wav

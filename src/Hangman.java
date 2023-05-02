@@ -1,8 +1,12 @@
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Hangman extends JFrame implements ActionListener {
@@ -17,6 +21,9 @@ public class Hangman extends JFrame implements ActionListener {
     private JDialog resultDialog, setScore;
     private Font customFont;
 
+    private ProjectComm comm;
+
+
 
 
 
@@ -24,6 +31,11 @@ public class Hangman extends JFrame implements ActionListener {
 
         // The game screen
         super("Pacman-ers: Hangman");
+        try {
+            comm = new ProjectComm("pacmaners");
+        }catch(IOException ioe){
+            System.out.println(ioe);
+        }
         setSize(CommonConstants.FRAME_SIZE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -42,6 +54,7 @@ public class Hangman extends JFrame implements ActionListener {
 
         addGuiComponents();
     }
+
 
     private void addGuiComponents() {
         // hangman image for game screen
@@ -153,8 +166,14 @@ public class Hangman extends JFrame implements ActionListener {
                 if (!hiddenWordLabel.getText().contains("*")) {
                     resultLabel.setText("Correct!");
                     resultDialog.setVisible(true);
-                }
+                    System.out.println("message sent");
+                    try {
+                        comm.sendCommand("congrats");
+                    } catch(IOException ioe){
+                        System.out.print(ioe);
+                    }
 
+                }
             } else {
                 // indicate that the user chose the wrong letter
                 button.setBackground(Color.RED);

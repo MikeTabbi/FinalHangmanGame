@@ -28,9 +28,12 @@ import java.awt.event.ActionListener;
                 new Hangman().setVisible(true);
             }
         });
+        // Adding button to screen
         f.add(b);
+        // Set size of the button
         f.setSize(1450,840);
         f.setLayout(null);
+        // Make button visible
         f.setVisible(true);
         f.getContentPane().add(hangmanImage);
 
